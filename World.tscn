@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ck6ad8o7quwo0"]
+
+[ext_resource type="Script" path="res://World.gd" id="1_iieyr"]
+[ext_resource type="Texture2D" uid="uid://bh08o37d0cfl5" path="res://assets/crosshair.svg" id="2_5rr0t"]
+[ext_resource type="PackedScene" uid="uid://23pmxm75v1ae" path="res://Player.tscn" id="4_aob0h"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_iieyr")
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+position = Vector2(973.5, 504.422)
+scale = Vector2(0.872, 1)
+texture = ExtResource("2_5rr0t")
+
+[node name="Entities" type="Node3D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("4_aob0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.215, 0)
+
+[node name="Chunks" type="Node3D" parent="."]

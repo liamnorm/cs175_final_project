@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://btjofil7sp4vt"]
+
+[ext_resource type="Shader" path="res://assets/block_material.gdshader" id="1_3uedw"]
+[ext_resource type="Texture2D" uid="uid://yipretult7ai" path="res://assets/textures.png" id="2_wk3mp"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3uedw")
+shader_parameter/tex = ExtResource("2_wk3mp")
