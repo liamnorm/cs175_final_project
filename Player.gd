@@ -1,9 +1,10 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const WALK_SPEED    = 5.0
+const RUN_SPEED     = 7.5
 const JUMP_VELOCITY = 7.5
-const EYE_HEIGHT = 1.0
+const EYE_HEIGHT    = 1.0
 
 var SPAWN = Vector3(0, 64, 0)
 
@@ -57,9 +58,16 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("space") and is_on_floor():
 		y_change = JUMP_VELOCITY
-
-	var x_change = (int(Input.is_action_pressed("d")) - int(Input.is_action_pressed("a"))) * SPEED
-	var z_change = (int(Input.is_action_pressed("w")) - int(Input.is_action_pressed("s"))) * SPEED
+	
+	# run while 'q' is pressed
+	var SPE = 0.0
+	if Input.is_action_pressed("q"):
+		SPE = RUN_SPEED
+	else:
+		SPE = WALK_SPEED
+	
+	var x_change = (int(Input.is_action_pressed("d")) - int(Input.is_action_pressed("a"))) * SPE
+	var z_change = (int(Input.is_action_pressed("w")) - int(Input.is_action_pressed("s"))) * SPE
 	if x_change !=0 and z_change != 0:
 		x_change *= .707
 		z_change *= .707
