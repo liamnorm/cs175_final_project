@@ -1,10 +1,12 @@
 extends CharacterBody3D
 
-
+const CROUCH_SPEED  = 2.5
 const WALK_SPEED    = 5.0
 const RUN_SPEED     = 7.5
 const JUMP_VELOCITY = 7.5
 const EYE_HEIGHT    = 1.0
+
+var is_crouching : bool = false
 
 var SPAWN = Vector3(0, 64, 0)
 
@@ -36,6 +38,8 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+	if event.is_action_pressed("shift"):
+		toggle_crouch()
 
 	if event is InputEventMouseMotion:
 		$Head.rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
@@ -60,14 +64,16 @@ func _physics_process(delta):
 		y_change = JUMP_VELOCITY
 	
 	# run while 'q' is pressed
-	var SPE = 0.0
-	if Input.is_action_pressed("q"):
-		SPE = RUN_SPEED
+	var speed = 0.0
+	if is_crouching:
+		speed = CROUCH_SPEED
+	elif Input.is_action_pressed("q"):
+		speed = RUN_SPEED
 	else:
-		SPE = WALK_SPEED
+		speed = WALK_SPEED
 	
-	var x_change = (int(Input.is_action_pressed("d")) - int(Input.is_action_pressed("a"))) * SPE
-	var z_change = (int(Input.is_action_pressed("w")) - int(Input.is_action_pressed("s"))) * SPE
+	var x_change = (int(Input.is_action_pressed("d")) - int(Input.is_action_pressed("a"))) * speed
+	var z_change = (int(Input.is_action_pressed("w")) - int(Input.is_action_pressed("s"))) * speed
 	if x_change !=0 and z_change != 0:
 		x_change *= .707
 		z_change *= .707
@@ -101,3 +107,10 @@ func _physics_process(delta):
 		
 	else:
 		block_outline.visible = false
+		
+func toggle_crouch():
+	if is_crouching == true:
+		$Head.translate(Vector3(0, 0.5, 0))
+	elif is_crouching == false:
+		$Head.translate(Vector3(0, -0.5, 0))
+	is_crouching = !is_crouching
