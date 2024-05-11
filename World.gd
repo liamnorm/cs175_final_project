@@ -37,22 +37,23 @@ func _ready():
 	player.place_block.connect(place_block)
 
 func _thread_process():
-	while true:
-		for c in chunks.get_children():
-			var cx = c.chunk_position.x
-			var cz = c.chunk_position.y
-			
-			
-			var px = floor(player.position.x / Globals.DIMENSION.x)
-			var pz = floor(player.position.z / Globals.DIMENSION.z)
-			
-			var new_x = posmod(cx - px + load_radius/2, load_radius) + px - load_radius / 2
-			var new_z = posmod(cz - pz + load_radius/2, load_radius) + pz- load_radius / 2
-			
-			if (new_x != cx or new_z != cz):
-				c.set_chunk_position(Vector2(int(new_x), int(new_z)))
-				c.generate()
-				c.update()
+	pass
+	#while true:
+		#for c in chunks.get_children():
+			#var cx = c.chunk_position.x
+			#var cz = c.chunk_position.y
+			#
+			#
+			#var px = floor(player.position.x / Globals.DIMENSION.x)
+			#var pz = floor(player.position.z / Globals.DIMENSION.z)
+			#
+			#var new_x = posmod(cx - px + load_radius/2, load_radius) + px - load_radius / 2
+			#var new_z = posmod(cz - pz + load_radius/2, load_radius) + pz- load_radius / 2
+			#
+			#if (new_x != cx or new_z != cz):
+				#c.set_chunk_position(Vector2(int(new_x), int(new_z)))
+				#c.generate()
+				#c.update()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):

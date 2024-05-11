@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjm3t221h8vql"]
+
+[ext_resource type="Texture2D" uid="uid://bua1e4muxl1as" path="res://assets/tree-graphic.png" id="1_h75c2"]
+[ext_resource type="Script" path="res://assets/tree_3d.gd" id="1_x6v1b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkdlg"]
+transparency = 1
+albedo_texture = ExtResource("1_h75c2")
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_i43bm"]
+size = Vector2(4, 7.5)
+center_offset = Vector3(0.1, 2.08165e-12, 2.08165e-12)
+
+[node name="tree3D" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_x6v1b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_bkdlg")
+mesh = SubResource("QuadMesh_i43bm")

@@ -2,6 +2,8 @@
 
 extends StaticBody3D
 
+var trees = []
+
 @onready var optionsMenu = $OptionsMenu 
 
 const vertices = [
@@ -30,6 +32,7 @@ var mesh = null
 var mesh_instance = null
 
 var material = preload("res://assets/block_material.tres")
+var tree3D = preload("res://assets/tree_3d.tscn")
 
 var chunk_position = Vector2(0,0)
 var global_offset = Vector3(0,0,0)
@@ -73,8 +76,14 @@ func generate():
 					block = Globals.DIRT
 				elif j == height:
 					block = Globals.GRASS
-					if randf() < 0.01:
-						block = Globals.WOOD
+					if j >= 32:
+						if randf() < 0.01:
+							block = Globals.GRASS
+							var pos = Vector3(global_pos.x, height, global_pos.y)
+							trees.append(pos)
+							var tree = tree3D.instantiate()
+							tree.set_tree_position(pos)
+							get_parent().get_parent().add_child(tree)
 				elif j < 32:
 					block = Globals.WATER
 				
