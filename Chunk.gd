@@ -178,7 +178,8 @@ func set_chunk_position(pos):
 	global_offset = Vector3(pos.x, 0, pos.y) * Globals.DIMENSION
 	
 func _on_toggle_RoundEarth():
-	var toggle = !(material.get_shader_parameter("round_earth"))
+	Globals.roundearth = not Globals.roundearth
+	print(Globals.roundearth)
 	print("toggle")
-	material.set_shader_parameter("round_earth", toggle)
+	material.set_shader_parameter("round_earth", Globals.roundearth)
 	update()

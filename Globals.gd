@@ -4,6 +4,8 @@ var Map = []
 
 var textures = {}
 
+var roundearth = false
+
 const DIMENSION = Vector3(16, 64, 16)
 const TEXTURE_ATLAS_SIZE = Vector2(8,2)
 
