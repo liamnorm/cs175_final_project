@@ -38,7 +38,7 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
-	if event.is_action_pressed("shift"):
+	if event.is_action_pressed("crouch"):
 		toggle_crouch()
 
 	if event is InputEventMouseMotion:
@@ -67,7 +67,7 @@ func _physics_process(delta):
 	var speed = 0.0
 	if is_crouching:
 		speed = CROUCH_SPEED
-	elif Input.is_action_pressed("q"):
+	elif Input.is_action_pressed("run"):
 		speed = RUN_SPEED
 	else:
 		speed = WALK_SPEED

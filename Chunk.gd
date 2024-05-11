@@ -2,6 +2,8 @@
 
 extends StaticBody3D
 
+@onready var optionsMenu = $OptionsMenu 
+
 const vertices = [
 	Vector3(0, 0, 0),
 	Vector3(1, 0, 0),
@@ -35,11 +37,15 @@ var global_offset = Vector3(0,0,0)
 var noise = FastNoiseLite.new()
 
 func _ready():
-	
+	optionsMenu.toggle_RoundEarth.connect(_on_toggle_RoundEarth)
 	#material.albedo_texture.set_flags(2)
-	
 	generate()
 	update()
+
+func _input(event):
+	if event.is_action_pressed("options"):
+		optionsMenu.show()
+		get_tree().paused = true
 	
 func generate():
 	blocks = []
@@ -73,7 +79,6 @@ func generate():
 					block = Globals.WATER
 				
 				blocks[i][j][k] = block
-	
 
 
 func update():
@@ -102,7 +107,7 @@ func update():
 
 func check_transparent(x, y, z):
 	if x >= 0 and x < Globals.DIMENSION.x and \
-		y >= 0 and y< Globals.DIMENSION.y and \
+		y >= 0 and y < Globals.DIMENSION.y and \
 		z >= 0 and z < Globals.DIMENSION.z:
 		return not Globals.types[blocks[x][y][z]][Globals.SOLID]
 	return true
@@ -134,7 +139,8 @@ func create_block(x, y, z):
 
 	if check_transparent(x, y, z + 1):
 		create_face(FRONT, x, y, z, block_info[Globals.FRONT])
-	
+
+
 func create_face(l, x, y, z, texture_atlas_offset):
 	var offset = Vector3(x,y,z) + global_offset
 	var a = vertices[l[0]] + offset
@@ -162,3 +168,8 @@ func set_chunk_position(pos):
 	position = Vector3(0,0,0) #Vector3(pos.x, 0, pos.y) * Globals.DIMENSION
 	global_offset = Vector3(pos.x, 0, pos.y) * Globals.DIMENSION
 	
+func _on_toggle_RoundEarth():
+	var toggle = !(material.get_shader_parameter("round_earth"))
+	print("toggle")
+	material.set_shader_parameter("round_earth", toggle)
+	update()

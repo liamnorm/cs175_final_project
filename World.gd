@@ -8,11 +8,13 @@ var load_radius = 5
 @onready var player = $Player
 @onready var entities = $Entities
 
+@onready var pauseMenu = $PauseMenu
+
+
 var load_thread = Thread.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	# instantiate chunks
 	for i in range(0, load_radius):
 		for j in range(0, load_radius):
@@ -55,6 +57,11 @@ func _thread_process():
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+	if event.is_action_pressed("pause"):
+		pauseMenu.show()
+		get_tree().paused = true
+
+		
 
 func get_chunk(chunk_pos):
 	for c in chunks.get_children():

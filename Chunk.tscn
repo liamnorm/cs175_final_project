@@ -1,6 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://bihne73v4xns1"]
+[gd_scene load_steps=3 format=3 uid="uid://bihne73v4xns1"]
 
 [ext_resource type="Script" path="res://Chunk.gd" id="1_ee2uq"]
+[ext_resource type="Script" path="res://OptionsMenu.gd" id="2_gm0wg"]
 
 [node name="StaticBody3D" type="StaticBody3D"]
 script = ExtResource("1_ee2uq")
+
+[node name="OptionsMenu" type="Control" parent="."]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 550.0
+offset_top = 380.0
+offset_right = 590.0
+offset_bottom = 420.0
+scale = Vector2(8, 8)
+script = ExtResource("2_gm0wg")
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RoundEarth" type="CheckButton" parent="OptionsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Round Earth"
+
+[connection signal="pressed" from="OptionsMenu/MarginContainer/VBoxContainer/Resume" to="OptionsMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="OptionsMenu/MarginContainer/VBoxContainer/RoundEarth" to="OptionsMenu" method="_on_round_earth_pressed"]

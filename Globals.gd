@@ -27,7 +27,8 @@ enum {
 	WOOD,
 	WOOD_PLANK,
 	WATER,
-	PLANT
+	PLANT,
+	LEAF
 }
 
 
@@ -41,6 +42,7 @@ const wood_side = Vector2(7,0)
 const wood_top = Vector2(0,1)
 const wood_plank_face = Vector2(1,1)
 const water_face = Vector2(3,1)
+const leaf_face = Vector2(4,1)
 
 
 const types = {
@@ -90,5 +92,10 @@ const types = {
 	PLANT: {
 		SOLID:false,
 		TOP:Vector2(2,1)
+	},
+	LEAF: {
+		TOP:leaf_face, BOTTOM:leaf_face, LEFT:leaf_face,
+		RIGHT:leaf_face, FRONT:leaf_face, BACK:leaf_face,
+		SOLID:true,
 	}
 }

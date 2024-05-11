@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck6ad8o7quwo0"]
+[gd_scene load_steps=5 format=3 uid="uid://ck6ad8o7quwo0"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_iieyr"]
 [ext_resource type="Texture2D" uid="uid://bh08o37d0cfl5" path="res://assets/crosshair.svg" id="2_5rr0t"]
 [ext_resource type="PackedScene" uid="uid://23pmxm75v1ae" path="res://Player.tscn" id="4_aob0h"]
+[ext_resource type="PackedScene" uid="uid://b21lkb3064ssb" path="res://PauseMenu.tscn" id="4_wql0q"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_iieyr")
@@ -18,3 +19,12 @@ texture = ExtResource("2_5rr0t")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.215, 0)
 
 [node name="Chunks" type="Node3D" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_wql0q")]
+process_mode = 2
+visible = false
+offset_left = 835.0
+offset_top = 404.0
+offset_right = 775.0
+offset_bottom = 332.0
+scale = Vector2(8, 8)

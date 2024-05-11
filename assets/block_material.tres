@@ -6,4 +6,5 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_3uedw")
+shader_parameter/round_earth = false
 shader_parameter/tex = ExtResource("2_wk3mp")
